@@ -1,0 +1,10 @@
+<app-menu />
+
+<mat-grid-list cols="5">
+  @for (item of pokeList(); track $index) {
+  <mat-grid-tile>
+    <app-card [info]="item" />
+  </mat-grid-tile>
+
+  }
+</mat-grid-list>
