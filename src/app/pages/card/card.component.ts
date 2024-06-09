@@ -1,5 +1,15 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnChanges,
+  OnInit,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { PokeService } from '../../services/poke.service';
 
@@ -10,18 +20,27 @@ import { PokeService } from '../../services/poke.service';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
-export class CardComponent implements OnInit {
-  info = input<any>();
+export class CardComponent implements OnInit, OnChanges {
+  info = input<any>({ name: '' });
 
-  url = signal('');
+  url: WritableSignal<string> = signal<string>('');
 
   pokeService = inject(PokeService);
 
   constructor() {}
   ngOnInit(): void {
     this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
-      console.log(res.sprites.front_default);
       this.url.set(res.sprites.front_default);
+      // sprites.front_default
     });
+  }
+  ngOnChanges(): void {
+    console.log('cambio', this.info());
+    console.log(' url', this.url());
+    if (this.info()) {
+      this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
+        this.url.set(res.sprites.front_default);
+      });
+    }
   }
 }
