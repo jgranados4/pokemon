@@ -1,10 +1,23 @@
 <app-menu />
 
 <mat-grid-list cols="5">
-  @for (item of pokeList(); track $index) {
+  @for (item of pokeList(); track item.id) {
   <mat-grid-tile>
     <app-card [info]="item" />
   </mat-grid-tile>
 
   }
 </mat-grid-list>
+<section class="btns">
+  <button
+    [disabled]="page() === 0"
+    (click)="prevPage()"
+    mat-flat-button
+    color="primary"
+  >
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <button (click)="nextPage()" mat-flat-button color="warn">
+    <mat-icon>arrow_forward_ios</mat-icon>
+  </button>
+</section>
