@@ -1,5 +1,5 @@
 <app-menu />
-
+@defer (on viewport) {
 <mat-grid-list cols="5">
   @for (item of pokeList(); track item.id) {
   <mat-grid-tile>
@@ -21,3 +21,9 @@
     <mat-icon>arrow_forward_ios</mat-icon>
   </button>
 </section>
+}@placeholder {
+<h1>..</h1>
+} @loading(minimum 3s) {
+
+<mat-spinner class="carga"></mat-spinner>
+}

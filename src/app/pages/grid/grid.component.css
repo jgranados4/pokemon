@@ -3,6 +3,10 @@
   text-align: center;
 }
 
-button{
+button {
   margin: 1rem;
+}
+.carga {
+  margin: 0 auto;
+  margin-top: 120px;
 }
