@@ -35,8 +35,6 @@ export class CardComponent implements OnInit, OnChanges {
     });
   }
   ngOnChanges(): void {
-    console.log('cambio', this.info());
-    console.log(' url', this.url());
     if (this.info()) {
       this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
         this.url.set(res.sprites.front_default);
