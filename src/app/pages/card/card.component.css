@@ -1,3 +1,6 @@
 .example-card {
   max-width: 300px;
 }
+mat-card {
+  padding: 30px;
+}

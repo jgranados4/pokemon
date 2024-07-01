@@ -2,8 +2,10 @@ import { NgOptimizedImage } from '@angular/common';
 import {
   Component,
   computed,
+  effect,
   inject,
   input,
+  model,
   OnChanges,
   OnInit,
   Signal,
@@ -21,16 +23,22 @@ import { PokeService } from '../../services/poke.service';
   styleUrl: './card.component.css',
 })
 export class CardComponent implements OnInit, OnChanges {
-  info = input<any>({ name: '' });
+  info = input<any>({});
+  data = model<any>({});
 
   url: WritableSignal<string> = signal<string>('');
 
   pokeService = inject(PokeService);
 
-  constructor() {}
+  constructor() {
+    effect(() => {});
+  }
   ngOnInit(): void {
     this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
       this.url.set(res.sprites.front_default);
+      this.data.set(res);
+      console.log(res);
+
       // sprites.front_default
     });
   }
@@ -38,6 +46,7 @@ export class CardComponent implements OnInit, OnChanges {
     if (this.info()) {
       this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
         this.url.set(res.sprites.front_default);
+        this.data.set(res);
       });
     }
   }
