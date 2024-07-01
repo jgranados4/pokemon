@@ -1,11 +1,31 @@
 <app-menu />
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Ingrese el Pokemon</mat-label>
+    <input
+      type="text"
+      placeholder="Buscar Pokemon"
+      matInput
+      [matAutocomplete]="auto"
+      (input)="inputText($event)"
+    />
+
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (item of filterpokemon(); track item.id ) {
+      <mat-option [value]="item.name">{{ item.name }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  <button type="button" mat-raised-button (click)="filterCLICK($event)">
+    Buscar
+  </button>
+</form>
 @defer (on viewport) {
 <mat-grid-list cols="5">
   @for (item of pokeList(); track item.id) {
   <mat-grid-tile>
     <app-card [info]="item" />
   </mat-grid-tile>
-
   }
 </mat-grid-list>
 <section class="btns">

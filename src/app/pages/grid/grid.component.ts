@@ -1,4 +1,12 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { CardComponent } from '../card/card.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -6,6 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PokeService } from '../../services/poke.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-grid',
@@ -17,15 +30,30 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    CommonModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.css',
 })
-export class GridComponent {
+export class GridComponent implements OnInit {
   pokeList: WritableSignal<Array<any>> = signal([]);
   public page: WritableSignal<number> = signal<number>(0);
+  filterpokemon: WritableSignal<any[]> = signal<any>([]);
   pokService = inject(PokeService);
   constructor() {
+    effect(
+      () => {
+        console.log('el valor de filter es ', this.filterpokemon());
+        console.log('pokelist ', this.pokeList().length);
+      },
+      { allowSignalWrites: true }
+    );
+  }
+  ngOnInit() {
     this.setdata();
   }
   setdata() {
@@ -36,12 +64,33 @@ export class GridComponent {
   //
   nextPage() {
     this.page.update((value) => value + 8);
-    console.log('el signal es ', this.page());
     this.setdata();
   }
   prevPage() {
     this.page.update((value) => value - 8);
-    console.log('el signal es ', this.page());
     this.setdata();
+  }
+
+  inputText(event: Event) {
+    this.buscar(event);
+  }
+  filterCLICK(even: Event): void {
+    this.pokeList.update((value) => {
+      return value.filter((poke: any) => {
+        return poke.name.includes(this.filterpokemon()[0].name);
+      });
+    });
+  }
+
+  buscar(even: Event): void {
+    const inputElement = even.target as HTMLInputElement;
+    const events = inputElement.value;
+    if (events.length > 2) {
+      this.filterpokemon.set(
+        this.pokeList().filter((poke) => poke.name.includes(events))
+      );
+    } else {
+      this.filterpokemon.set(this.pokeList());
+    }
   }
 }
