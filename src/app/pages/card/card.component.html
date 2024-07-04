@@ -11,5 +11,8 @@
   }
 
   <mat-card-title>{{ info()?.name }}</mat-card-title>
-  <mat-card-content>{{ data().base_experience }}</mat-card-content>
+  @if (data()) {
+  <mat-card-content>{{ data()?.base_experience }}</mat-card-content>
+
+  }
 </mat-card>

@@ -28,6 +28,12 @@
   </mat-grid-tile>
   }
 </mat-grid-list>
+}@placeholder {
+<h1>..</h1>
+} @loading(minimum 3s) {
+
+<mat-spinner class="carga"></mat-spinner>
+}
 <section class="btns">
   <button
     [disabled]="page() === 0"
@@ -41,9 +47,3 @@
     <mat-icon>arrow_forward_ios</mat-icon>
   </button>
 </section>
-}@placeholder {
-<h1>..</h1>
-} @loading(minimum 3s) {
-
-<mat-spinner class="carga"></mat-spinner>
-}

@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { PokeService } from '../../services/poke.service';
+import { IPokemon } from '../../interfaces/pokemon';
 
 @Component({
   selector: 'app-card',
@@ -24,7 +25,7 @@ import { PokeService } from '../../services/poke.service';
 })
 export class CardComponent implements OnInit, OnChanges {
   info = input<any>({});
-  data = model<any>({});
+  data = model<IPokemon>();
 
   url: WritableSignal<string> = signal<string>('');
 
