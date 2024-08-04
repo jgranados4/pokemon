@@ -16,15 +16,16 @@
       }
     </mat-autocomplete>
   </mat-form-field>
-  <button type="button" mat-raised-button (click)="filterCLICK($event)">
+  <button type="button" mat-raised-button (click)="filterCLICK()">
     Buscar
   </button>
+  <button type="button" mat-raised-button (click)="Clear()">Limpiar</button>
 </form>
 @defer (on viewport) {
 <mat-grid-list cols="5">
   @for (item of pokeList(); track item.id) {
   <mat-grid-tile>
-    <app-card [info]="item"  />
+    <app-card [info]="item" />
   </mat-grid-tile>
   }
 </mat-grid-list>

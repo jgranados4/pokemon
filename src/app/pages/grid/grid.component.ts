@@ -48,7 +48,6 @@ export class GridComponent implements OnInit {
     effect(
       () => {
         console.log('el valor de filter es ', this.filterpokemon());
-        console.log('pokelist ', this.pokeList().length);
       },
       { allowSignalWrites: true }
     );
@@ -72,18 +71,7 @@ export class GridComponent implements OnInit {
   }
 
   inputText(event: Event) {
-    this.buscar(event);
-  }
-  filterCLICK(even: Event): void {
-    this.pokeList.update((value) => {
-      return value.filter((poke: any) => {
-        return poke.name.includes(this.filterpokemon()[0].name);
-      });
-    });
-  }
-
-  buscar(even: Event): void {
-    const inputElement = even.target as HTMLInputElement;
+    const inputElement = event.target as HTMLInputElement;
     const events = inputElement.value;
     if (events.length > 2) {
       this.filterpokemon.set(
@@ -92,5 +80,16 @@ export class GridComponent implements OnInit {
     } else {
       this.filterpokemon.set(this.pokeList());
     }
+  }
+
+  filterCLICK(): void {
+    this.pokeList.update((value) => {
+      return value.filter((poke: any) => {
+        return poke.name.includes(this.filterpokemon()[0].name);
+      });
+    });
+  }
+  Clear() {
+    this.setdata();
   }
 }

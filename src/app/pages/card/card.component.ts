@@ -53,16 +53,20 @@ export class CardComponent implements OnInit, OnChanges {
   pokeService = inject(PokeService);
 
   constructor() {
-    effect(() => {});
+    effect(() => {
+      console.log('dadtad', this.data());
+    });
   }
   ngOnInit(): void {
-    this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
-      this.url.set(res.sprites.front_default);
-      this.data.set(res);
-      console.log(res);
-
-      // sprites.front_default
-    });
+    this.pokeService
+      .getPokeData(this.info().name)
+      .subscribe((res: any | undefined) => {
+        this.url.set(res.sprites.front_default);
+        if (res) {
+          this.data.set(res);
+        }
+        // sprites.front_default
+      });
   }
   ngOnChanges(): void {
     if (this.info()) {
