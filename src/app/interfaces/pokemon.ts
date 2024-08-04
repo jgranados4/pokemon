@@ -1,7 +1,7 @@
 export interface IPokemon {
   abilities: Ability[];
   base_experience: number;
-  cries: Cries;
+  cries: Cries[];
   forms: Species[];
   game_indices: GameIndex[];
   height: number;
@@ -14,8 +14,8 @@ export interface IPokemon {
   order: number;
   past_abilities: any[];
   past_types: any[];
-  species: Species;
-  sprites: Sprites;
+  species: Species[];
+  sprites: Sprites[];
   stats: Stat[];
   types: Type[];
   weight: number;

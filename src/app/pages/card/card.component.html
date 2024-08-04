@@ -12,10 +12,10 @@
 
   <mat-card-title>{{ info()?.name }}</mat-card-title>
   @if (data()) {
-  <mat-card-content>{{ data()?.base_experience }}</mat-card-content>
+  <mat-card-content>{{ data().base_experience }}</mat-card-content>
   <mat-card-content
-    >Habilidades:{{ data()?.abilities?.[0]?.ability?.name }}</mat-card-content
+    >Habilidades:{{ data().abilities[0].ability.name }}</mat-card-content
   >
-  <mat-card-content>Tipo:{{ data()?.types?.[0]?.type?.name }}</mat-card-content>
+  <mat-card-content>Tipo:{{ data().types[0].type.name }}</mat-card-content>
   }
 </mat-card>

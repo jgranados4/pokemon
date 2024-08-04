@@ -25,7 +25,28 @@ import { IPokemon } from '../../interfaces/pokemon';
 })
 export class CardComponent implements OnInit, OnChanges {
   info = input<any>({});
-  data = model<IPokemon>();
+  data = signal<IPokemon>({
+    abilities: [],
+    base_experience: 0,
+    cries: [],
+    forms: [],
+    game_indices: [],
+    height: 0,
+    held_items: [],
+    id: 0,
+    is_default: false,
+    location_area_encounters: '',
+    moves: [],
+    name: '',
+    order: 0,
+    past_abilities: [],
+    past_types: [],
+    species: [],
+    sprites: [],
+    stats: [],
+    types: [],
+    weight: 0,
+  });
 
   url: WritableSignal<string> = signal<string>('');
 
