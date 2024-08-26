@@ -88,6 +88,9 @@ export class GridComponent implements OnInit {
         return poke.name.includes(this.filterpokemon()[0].name);
       });
     });
+    setTimeout(() => {
+      this.setdata();
+    }, 1000);
   }
   Clear() {
     this.setdata();
