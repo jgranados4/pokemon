@@ -1,5 +1,7 @@
 mat-card {
-  padding: 20px;
+  height: 300px;
+  width: 260px;
+  padding: 15px;
 }
 .imagenes {
   text-align: center;

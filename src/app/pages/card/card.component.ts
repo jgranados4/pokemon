@@ -1,25 +1,23 @@
 import { NgOptimizedImage } from '@angular/common';
 import {
   Component,
-  computed,
   effect,
   inject,
   input,
-  model,
   OnChanges,
   OnInit,
-  Signal,
   signal,
   WritableSignal,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { PokeService } from '../../services/poke.service';
 import { IPokemon } from '../../interfaces/pokemon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [MatCardModule, NgOptimizedImage],
+  imports: [MatCardModule, NgOptimizedImage, MatButtonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
@@ -61,7 +59,10 @@ export class CardComponent implements OnInit, OnChanges {
     this.pokeService
       .getPokeData(this.info().name)
       .subscribe((res: any | undefined) => {
-        this.url.set(res.sprites.front_default);
+        this.url.set(
+          res.sprites.versions['generation-v']['black-white'].animated
+            .front_shiny
+        );
         if (res) {
           this.data.set(res);
         }
@@ -71,7 +72,10 @@ export class CardComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     if (this.info()) {
       this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
-        this.url.set(res.sprites.front_default);
+        this.url.set(
+          res.sprites.versions['generation-v']['black-white'].animated
+            .front_shiny
+        );
         this.data.set(res);
       });
     }
