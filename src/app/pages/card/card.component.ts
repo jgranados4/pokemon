@@ -52,7 +52,7 @@ export class CardComponent implements OnInit, OnChanges {
 
   constructor() {
     effect(() => {
-      console.log('dadtad', this.data());
+      // console.log('dadtad', this.data());
     });
   }
   ngOnInit(): void {

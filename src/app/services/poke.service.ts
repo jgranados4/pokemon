@@ -15,7 +15,7 @@ export class PokeService {
 
   getLists(page: number = 0) {
     return this.http
-      .get(`${this.urlpokemons}/`, {
+      .get(`${this.urlpokemons}/pokemon`, {
         params: {
           offset: page,
           limit: 10,
@@ -29,7 +29,7 @@ export class PokeService {
       );
   }
   getPokeData(name: string) {
-    return this.http.get<IPokemon>(`${this.urlpokemons}/${name}`).pipe(
+    return this.http.get<IPokemon>(`${this.urlpokemons}/pokemon/${name}`).pipe(
       catchError((error) => {
         console.log('error', error);
         return error;

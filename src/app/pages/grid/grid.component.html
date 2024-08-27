@@ -22,7 +22,7 @@
   <button type="button" mat-raised-button (click)="Clear()">Limpiar</button>
 </form>
 @defer (on viewport) {
-<mat-grid-list cols="5">
+<mat-grid-list cols="5" rowHeight="25rem">
   @for (item of pokeList(); track item.id) {
   <mat-grid-tile>
     <app-card [info]="item" />
