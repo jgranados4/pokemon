@@ -6,6 +6,7 @@
       type="text"
       placeholder="Buscar Pokemon"
       matInput
+      #searchInput
       [matAutocomplete]="auto"
       (input)="inputText($event)"
     />
@@ -19,7 +20,9 @@
   <button type="button" mat-raised-button (click)="filterCLICK()">
     Buscar
   </button>
-  <button type="button" mat-raised-button (click)="Clear()">Limpiar</button>
+  <button type="button" mat-raised-button (click)="Clear(searchInput)">
+    Limpiar
+  </button>
 </form>
 @defer (on viewport) {
 <mat-grid-list cols="5" rowHeight="25rem">

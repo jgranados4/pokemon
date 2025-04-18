@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import {
   Component,
+  computed,
   effect,
   inject,
   input,
@@ -21,8 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
-export class CardComponent implements OnInit, OnChanges {
-  info = input<any>({});
+export class CardComponent implements OnInit {
+  info = input<any>([]);
   data = signal<IPokemon>({
     abilities: [],
     base_experience: 0,
@@ -49,11 +50,29 @@ export class CardComponent implements OnInit, OnChanges {
   url: WritableSignal<string> = signal<string>('');
 
   pokeService = inject(PokeService);
+  infor = computed(() => this.info());
 
   constructor() {
-    effect(() => {
-      // console.log('dadtad', this.data());
-    });
+    console.log('el valor de info es ', this.infor());
+    effect(
+      () => {
+        let current = this.infor();
+        console.log('el valor de current es ', current);
+        if (current && current.name) {
+          this.pokeService.getPokeData(current.name).subscribe({
+            next: (res: any) => {
+              this.url.set(
+                res.sprites.versions['generation-v']['black-white'].animated
+                  .front_shiny
+              );
+              this.data.set(res);
+            },
+          });
+        }
+        // console.log('el valor de data es ', this.data());
+      },
+      { allowSignalWrites: true }
+    );
   }
   ngOnInit(): void {
     this.pokeService
@@ -68,16 +87,5 @@ export class CardComponent implements OnInit, OnChanges {
         }
         // sprites.front_default
       });
-  }
-  ngOnChanges(): void {
-    if (this.info()) {
-      this.pokeService.getPokeData(this.info().name).subscribe((res: any) => {
-        this.url.set(
-          res.sprites.versions['generation-v']['black-white'].animated
-            .front_shiny
-        );
-        this.data.set(res);
-      });
-    }
   }
 }

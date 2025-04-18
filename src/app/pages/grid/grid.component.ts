@@ -3,6 +3,7 @@ import {
   computed,
   effect,
   inject,
+  OnDestroy,
   OnInit,
   signal,
   WritableSignal,
@@ -39,47 +40,50 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.css',
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnDestroy {
   pokeList: WritableSignal<Array<any>> = signal([]);
   public page: WritableSignal<number> = signal<number>(0);
-  filterpokemon: WritableSignal<any[]> = signal<any>([]);
+  searchTerm: WritableSignal<string> = signal('');
+  //  * Implementacion en el autocomplete
+  filterpokemon = computed(() => {
+    const term = this.searchTerm();
+    const list = this.pokeList();
+    if (!term || term.length < 3) {
+      // console.log('Termino de busqueda:', term);
+      // console.log('Lista de pokemones:', list);
+      return list;
+    }
+
+    return list.filter((poke) => poke.name.includes(term));
+  });
   pokService = inject(PokeService);
   constructor() {
     effect(
       () => {
-        console.log('el valor de filter es ', this.filterpokemon());
+        const currentPage = this.page();
+        this.setdata(currentPage);
       },
       { allowSignalWrites: true }
     );
   }
-  ngOnInit() {
-    this.setdata();
-  }
-  setdata() {
-    this.pokService.getLists(this.page()).subscribe((res: any) => {
+
+  setdata(page: number) {
+    this.pokService.getLists(page).subscribe((res: any) => {
       this.pokeList.set(res.results);
     });
   }
   //
   nextPage() {
     this.page.update((value) => value + 8);
-    this.setdata();
   }
   prevPage() {
     this.page.update((value) => value - 8);
-    this.setdata();
   }
 
   inputText(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const events = inputElement.value;
-    if (events.length > 2) {
-      this.filterpokemon.set(
-        this.pokeList().filter((poke) => poke.name.includes(events))
-      );
-    } else {
-      this.filterpokemon.set(this.pokeList());
-    }
+    this.searchTerm.set(events);
   }
 
   filterCLICK(): void {
@@ -88,11 +92,14 @@ export class GridComponent implements OnInit {
         return poke.name.includes(this.filterpokemon()[0].name);
       });
     });
-    setTimeout(() => {
-      this.setdata();
-    }, 1000);
   }
-  Clear() {
-    this.setdata();
+  Clear(input: HTMLInputElement) {
+    input.value = '';
+    this.setdata(0);
+    this.searchTerm.set('');
+  }
+  ngOnDestroy(): void {
+    //destroy the observable subscription to avoid memory leaks
+    //desucribirme
   }
 }
