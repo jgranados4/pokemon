@@ -1,27 +1,43 @@
-# Proyecto API Pokémon
+# 🧩 Proyecto API Pokémon
 
-## Descripción General
+Una aplicación web moderna para explorar datos de Pokémon, construida con lo último de Angular y pensada para rendimiento, escalabilidad y una excelente experiencia de usuario.
 
-Este proyecto consiste en la creación de una aplicación web para la visualización de datos de Pokémon utilizando las siguientes tecnologías:
+---
 
-- **Angular 17**: Framework principal para la construcción de la aplicación.
-- **Angular Material**: Conjunto de componentes UI para crear una interfaz de usuario atractiva y funcional.
-- **Signals**: Utilizados para la gestión eficiente del estado y la comunicación entre componentes.
-- **Optimización de Imágenes**: Mejora del rendimiento mediante la optimización de las imágenes.
-- **Standalone Components**: Componentes independientes para facilitar la modularidad y el mantenimiento del código.
+## 🚀 Tech Stack
 
-## Objetivo
+- 🅰️ **Angular 17** – Framework principal.
+- 🎨 **Angular Material** – UI components listos para producción.
+- ⚡ **Signals + SignalStore** – Gestión reactiva y centralizada del estado.
+- 🖼️ **Optimización de Imágenes** – Mejora del performance al máximo.
+- 🧱 **Standalone Components** – Arquitectura modular y escalable.
 
-El objetivo de este proyecto es proporcionar una interfaz interactiva y visualmente atractiva para explorar y visualizar datos de diferentes Pokémon. La aplicación debe ser rápida, eficiente y fácil de usar.
+---
 
-## Características Principales
+## 🎯 Objetivo
 
-1. **Visualización de Datos de Pokémon**: Mostrar información detallada de cada Pokémon, incluyendo sus estadísticas, habilidades, y tipos.
-2. **Búsqueda y Filtrado**: Permitir a los usuarios buscar y filtrar Pokémon por diferentes criterios (nombre, tipo, etc.).
-3. **Interfaz de Usuario Intuitiva**: Utilizar Angular Material para crear una experiencia de usuario cohesiva y agradable.
-4. **Gestión de Estado con Signals**: Implementar una gestión de estado eficiente para asegurar la reactividad y la consistencia de los datos mostrados.
-5. **Optimización de Imágenes**: Cargar y mostrar imágenes de Pokémon de manera eficiente para mejorar el rendimiento de la aplicación.
-6. **Componentes Standalone**: Construir componentes modulares y reutilizables para mejorar la mantenibilidad del código.
+Crear una interfaz limpia, rápida e interactiva para visualizar información de Pokémon de forma dinámica, integrando buenas prácticas modernas de Angular.
 
+---
 
+## 🧠 Features
 
+- 🔍 **Búsqueda y Filtrado**  
+  Filtro instantáneo por nombre y tipo con input reactivo.
+
+- 📊 **Visualización Detallada**  
+  Estadísticas, habilidades y tipos de cada Pokémon.
+
+- 🧭 **Control de Paginación**  
+  Navegación entre páginas de resultados con estado global.
+
+- 🖼️ **Vista Grid / Lista**  
+  Alternancia de diseño controlada desde un store global vía `SignalStore`.
+
+- ⚙️ **Estado Global Reactivo**  
+  Todos los datos sincronizados con señales reactivas (`signal`, `computed`, `effect`).
+
+- 🧩 **Componentes Standalone**  
+  Separación lógica y visual para fácil mantenimiento y escalabilidad.
+
+---
