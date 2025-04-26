@@ -12,21 +12,21 @@
     />
 
     <mat-autocomplete #auto="matAutocomplete">
-      @for (item of filterpokemon(); track item.id ) {
+      @for (item of filteredPokemon(); track item.id ) {
       <mat-option [value]="item.name">{{ item.name }}</mat-option>
       }
     </mat-autocomplete>
   </mat-form-field>
-  <button type="button" mat-raised-button (click)="filterCLICK()">
+  <!-- <button type="button" mat-raised-button (click)="filterCLICK()">
     Buscar
-  </button>
+  </button> -->
   <button type="button" mat-raised-button (click)="Clear(searchInput)">
     Limpiar
   </button>
 </form>
 @defer (on viewport) {
 <mat-grid-list cols="5" rowHeight="25rem">
-  @for (item of pokeList(); track item.id) {
+  @for (item of filteredPokemon(); track item.id) {
   <mat-grid-tile>
     <app-card [info]="item" />
   </mat-grid-tile>
@@ -40,7 +40,7 @@
 }
 <section class="btns">
   <button
-    [disabled]="page() === 0"
+    [disabled]="store.page() === 0"
     (click)="prevPage()"
     mat-flat-button
     color="primary"

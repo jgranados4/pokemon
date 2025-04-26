@@ -1,10 +1,10 @@
 <mat-card class="example-card">
-  @if(url()){
+  @if(imageUrl()){
   <div class="imagenes">
     <img
       mat-card-image
-      [ngSrc]="url()"
-      [alt]="data().name"
+      [ngSrc]="imageUrl()"
+      [alt]="pokemon()?.name"
       priority
       width="90"
       height="90"
@@ -12,14 +12,16 @@
   </div>
   }
 
-  <mat-card-title>ID#{{ data().id }}</mat-card-title>
-  <mat-card-title>{{ data().name }}</mat-card-title>
-  @if (data()) {
-  <mat-card-content>{{ data().base_experience }}</mat-card-content>
-  @for(item of data().abilities;track $index){
+  <mat-card-title>ID#{{ pokemon()?.id }}</mat-card-title>
+  <mat-card-title>{{ pokemon()?.name }}</mat-card-title>
+  @if (pokemon()) {
+  <mat-card-content>{{ pokemon()?.base_experience }}</mat-card-content>
+  @for(item of pokemon()?.abilities;track $index){
   <mat-card-content>Habilidades:{{ item.ability.name }}</mat-card-content>
   }
 
-  <mat-card-content>Tipo:{{ data().types[0].type.name }}</mat-card-content>
+  <mat-card-content
+    >Tipo:{{ pokemon()?.types?.[0]?.type?.name || 'N/A' }}</mat-card-content
+  >
   }
 </mat-card>
