@@ -74,6 +74,9 @@ export class GridComponent implements OnDestroy {
     this.store.loadPage(0);
     this.store.searchTerm.set('');
   }
+  pokemonSelected(nombre: string) {
+    this.store.updateSearchTerm(nombre);
+  }
   ngOnDestroy(): void {
     //destroy the observable subscription to avoid memory leaks
     //desucribirme

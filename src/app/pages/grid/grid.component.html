@@ -11,7 +11,7 @@
       (input)="inputText($event)"
     />
 
-    <mat-autocomplete #auto="matAutocomplete">
+    <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="pokemonSelected($event.option.value)">
       @for (item of filteredPokemon(); track item.id ) {
       <mat-option [value]="item.name">{{ item.name }}</mat-option>
       }
