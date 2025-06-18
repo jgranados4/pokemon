@@ -23,7 +23,7 @@ Crear una interfaz limpia, rápida e interactiva para visualizar información de
 ## 🧠 Features
 
 - 🔍 **Búsqueda y Filtrado**  
-  Filtro instantáneo por nombre y tipo con input reactivo.
+  Filtro instantáneo por nombre y tipo con input o seleccion reactiva.
 
 - 📊 **Visualización Detallada**  
   Estadísticas, habilidades y tipos de cada Pokémon.
